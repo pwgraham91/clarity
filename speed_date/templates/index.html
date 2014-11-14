@@ -5,6 +5,13 @@
     <title></title>
 </head>
 <body>
-
+    <nav>
+        {% if not user.is_authenticated %}
+            <a href="{% url "social:begin" "facebook" %}">Facebook Login</a>
+        {% else %}
+            Hi {{ user.username }}!
+        {% endif %}
+    </nav>
+    <h1>Clarity Speed Dating</h1>
 </body>
 </html>
