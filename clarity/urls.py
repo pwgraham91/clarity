@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     url(r'^$', 'speed_date.views.index', name='index'),
     url(r'^caller/$', 'speed_date.views.caller', name='caller'),
     url(r'^callee/$', 'speed_date.views.callee', name='callee'),
+    url(r'^home/$', 'speed_date.views.home', name='home'),
     url('', include('social.apps.django_app.urls', namespace='social'))
 )

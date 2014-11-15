@@ -2,16 +2,15 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>Clarity Splash</title>
 </head>
 <body>
-    <nav>
-        {% if not user.is_authenticated %}
-            <a href="{% url "social:begin" "facebook" %}">Facebook Login</a>
-        {% else %}
-            Hi {{ user.username }}!
-        {% endif %}
-    </nav>
-    <h1>Clarity Speed Dating</h1>
+    {% if not user.is_authenticated %}
+        <a href="{% url "social:begin" "facebook" %}">Facebook Login</a>
+    {% else %}
+        <a href="{% url "home" %}">Home</a>
+    {% endif %}
+
+
 </body>
 </html>

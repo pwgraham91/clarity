@@ -32,8 +32,8 @@
         </div>
     </div>
     <script>
-        var userId = "randall";
-        var userName = "Some Kittens";
+        var userId = {{ user.username }};
+        var userName = {{ name }};
         var remoteUserId = "peter";
     </script>
     <script type="text/javascript" src="{% static "js/conference.js" %}"></script>

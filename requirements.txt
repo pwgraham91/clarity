@@ -1,3 +1,15 @@
 Django==1.7.1
+Pillow==2.6.1
+PyJWT==0.3.0
+Unidecode==0.04.16
+django-debug-toolbar==1.2.2
+facebook-sdk==0.4.0
+oauthlib==0.7.2
 psycopg2==2.5.4
+python-openid==2.2.5
+python-social-auth==0.2.1
+requests==2.4.3
+requests-oauthlib==0.4.2
+six==1.8.0
+sqlparse==0.1.13
 wsgiref==0.1.2
