@@ -6,7 +6,7 @@ var room;
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
 onBistriConferenceReady = function () {
-
+    getUserLocation()
     // test if the browser is WebRTC compatible
     if ( !BistriConference.isCompatible() ) {
         // if the browser is not compatible, display an alert
@@ -109,7 +109,7 @@ onBistriConferenceReady = function () {
     // when a call request is received from remote user
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( request ) {
 		// ask the user to accept or decline the invitation
-		if( confirm( request.name + " is inviting you to join his conference room. Click \"Ok\" to start the call." ) ){
+//		if( confirm( request.name + " is inviting you to join his conference room. Click \"Ok\" to start the call." ) ){
 			// invitation has been accepted
 			// ask the user to access to his webcam
 			 BistriConference.startStream( "webcamSD", function( localStream ){
@@ -121,7 +121,7 @@ onBistriConferenceReady = function () {
 			   // then join the room specified in the "request" object
 				BistriConference.joinRoom( request.room );
 			} );
-		}
+//		}
 	} );
 
     // bind function "callUser" to button "Call XXX"
@@ -169,3 +169,49 @@ function q( query ){
     // return the DOM node matching the query
     return document.querySelector( query );
 }
+
+
+// User Location
+
+var getUserLocation = function () {
+    console.log("getting location");
+    //check if the geolocation object is supported, if so get position
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(displayLocation, displayError);
+    }
+};
+
+
+var displayLocation = function (position) {
+
+    //build text string including co-ordinate data passed in parameter
+    var displayText = "User latitude is " + position.coords.latitude + " and longitude is " + position.coords.longitude;
+
+    //display the string for demonstration
+    document.getElementById("locationData").innerHTML = displayText;
+};
+
+var displayError = function (error) {
+
+    //get a reference to the HTML element for writing result
+    var locationElement = document.getElementById("locationData");
+
+    //find out which error we have, output message accordingly
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            locationElement.innerHTML = "Permission was denied";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            locationElement.innerHTML = "Location data not available";
+            break;
+        case error.TIMEOUT:
+            locationElement.innerHTML = "Location request timeout";
+            break;
+        case error.UNKNOWN_ERROR:
+            locationElement.innerHTML = "An unspecified error occurred";
+            break;
+        default:
+            locationElement.innerHTML = "Who knows what happened...";
+            break;
+    }
+};

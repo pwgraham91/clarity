@@ -13,14 +13,10 @@ def home(request):
     profile_data = graph.get_object("me")
     friends = graph.get_object("me/friends")
     picture = graph.get_object("me/picture", height="400")
-    print "THe type is ", type(User.objects.order_by('?'))
-    all_users = User.objects.order_by('?').exclude(email=request.user.email)
-    other_user = all_users[0]
     data = {
         'profile_data': profile_data,
         'friends': friends,
         'picture': picture,
-        'other_user': other_user
     }
     return render(request, "home.html", data)
 
@@ -31,13 +27,19 @@ def caller(request):
     profile_data = graph.get_object("me")
     friends = graph.get_object("me/friends")
     picture = graph.get_object("me/picture", height="400")
+    all_users = User.objects.order_by('?').exclude(email=request.user.email)
+    other_user = all_users[0]
     data = {
         'profile_data': profile_data,
         'friends': friends,
-        'picture': picture
+        'picture': picture,
+        'other_user': other_user
     }
     return render(request, "caller.html", data)
 
 
 def callee(request):
     return render(request, "callee.html")
+
+def loc(request):
+    return render(request, "loc.html")
