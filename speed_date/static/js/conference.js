@@ -6,7 +6,7 @@ var room;
 // when Bistri API client is ready, function
 // "onBistriConferenceReady" is invoked
 onBistriConferenceReady = function () {
-    getUserLocation()
+    getUserLocation();
     // test if the browser is WebRTC compatible
     if ( !BistriConference.isCompatible() ) {
         // if the browser is not compatible, display an alert
@@ -132,7 +132,7 @@ onBistriConferenceReady = function () {
 
     // open a new session on the server
     BistriConference.connect();
-}
+};
 
 // when button "Call XXX" has been clicked
 function callUser(){
@@ -249,7 +249,6 @@ dater_id = $('.user').attr('id');
             data: new_message,
             success: function (response) {
                 $('#message_id').val("");
-                console.log("hopefully worked")
             }
         });
     });

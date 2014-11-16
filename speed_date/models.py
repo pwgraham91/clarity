@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -6,6 +7,8 @@ class User(AbstractUser):
     # male=True female=False
     preference = models.BooleanField(default=False)
     gender = models.BooleanField(default=True)
+    # want to give them an initial datetimefield that is now, then update it when they hit the chat site
+    online = models.DateTimeField(default=datetime.now())
 
     def __unicode__(self):
         return u"{}".format(self.username)

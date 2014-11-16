@@ -11,6 +11,7 @@ from speed_date.models import User, Chat
 def index(request):
     return render(request, "index.html")
 
+
 def home(request):
     user_social_auth = request.user.social_auth.filter(provider='facebook').first()
     graph = facebook.GraphAPI(user_social_auth.extra_data['access_token'])
@@ -25,16 +26,26 @@ def home(request):
     }
     return render(request, "home.html", data)
 
-# 10.12.4.254:8000/caller
+
+# How to have someone else login on their own computer locally 10.12.4.254:8000/caller (will not work with facebook)
+# Only one caller page for RTC
 def caller(request):
+    # Get Facebook information
     user_social_auth = request.user.social_auth.filter(provider='facebook').first()
     graph = facebook.GraphAPI(user_social_auth.extra_data['access_token'])
     profile_data = graph.get_object("me")
     friends = graph.get_object("me/friends")
     picture = graph.get_object("me/picture", height="400")
-    all_users = User.objects.filter(gender=True).order_by('?').exclude(email=request.user.email)
+    # Filtering by gender and preference
+    user_gender = request.user.gender
+    user_preference = request.user.preference
+    # show a list of users who 1) fit my preference 2) whose preference fits me 3) randomly 4) and exclude myself
+    all_users = User.objects.filter(gender=user_preference).\
+        filter(preference=user_gender).order_by('?').exclude(email=request.user.email)
+    # Give me the first user in this list
     other_user = all_users[0]
-    other_user = User.objects.get(email='sfpacific100@gmail.com')
+    # For testing purposes, rewrite other_user to give me my alter FB account
+    # other_user = User.objects.get(email='sfpacific100@gmail.com')
     data = {
         'profile_data': profile_data,
         'friends': friends,
@@ -52,6 +63,7 @@ def loc(request):
     # imperial_d = D(mi=5)
     return render(request, "firebase_chat.html")
 
+
 def chat_messages(request, dater_id):
     target_dater = User.objects.get(pk=dater_id)
     message_sent = Chat.objects.filter(sender=request.user, recipient=target_dater)
@@ -68,6 +80,7 @@ def chat_messages(request, dater_id):
         'target_dater': target_dater,
     }
     return render(request, 'chat_messages.html', data)
+
 
 @csrf_exempt
 def new_message(request):

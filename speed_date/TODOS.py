@@ -10,4 +10,5 @@ __author__ = 'GoldenGate'
 5) Only request access to webcam once
 8) Ask on home page if they want to see girls or guys
 9) Clean up javascript by putting most of them in dedicated js files
+10) Home gives you a list of links to people who share a mutual attraction
 """
