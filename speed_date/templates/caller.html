@@ -3,42 +3,52 @@
 <html>
 <head>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/caller.css' %}">
     <style>
-        .container{
-            margin-top: 50px;
-            width: 400px;
-        }
-        .pane {
-            margin: 20px;
-            text-align: center;
-        }
-        video {
-            width: 100%;
-        }
+
     </style>
+
 </head>
 <body>
     <div class="container">
-        <div class="pane" id="pane_0">
-            <img src="//lh4.ggpht.com/_BvM-WT-osti6_Zbk41eoASZV59HGwzGVSfhNGA-DAlw6fh_lxB7-soJdsbB2lkrvy8e677vFIFo-ReMOme5YQ=s0">
+        <h1 id="{{ other_user.id }}" class="user">Chat with {{ other_user.first_name }}</h1>
+        <button class="btn btn-primary" id="newPerson">Find Someone New</button>
+        <div class="col-md-6">
+            <div id='{{ user.id }}' class="chat_area">
+                <div class="message_area"></div>
+                <div class="send_message">
+                    <input id='message_id' class="message_content" type="text"/>
+                   <div class="add_message">
+                       <input type="submit" value="Submit"/>
+                   </div>
+                </div>
+            </div>
         </div>
-        <div class="pane" id="pane_1" style="display: none">
-            <input type="button" value="Call {{ other_user.first_name }}" id="call" class="btn btn-info btn-default btn-block">
+        <div class="col-md-6">
+                <div class="pane" id="pane_0">
+                    <img src="//lh4.ggpht.com/_BvM-WT-osti6_Zbk41eoASZV59HGwzGVSfhNGA-DAlw6fh_lxB7-soJdsbB2lkrvy8e677vFIFo-ReMOme5YQ=s0">
+                </div>
+                <div class="pane" id="pane_1" style="display: none">
+                    <input type="button" value="Call {{ other_user.first_name }}" id="call" class="btn btn-info btn-default btn-block">
+                </div>
+                <div class="pane" id="pane_2" style="display: none">
+                    <div id="video_container"></div>
+                    <input type="button" value="Stop Call" id="quit" class="btn btn-danger btn-default btn-block">
+                </div>
+                <p id="locationData"></p>
+                <p>{{ user.gender }}</p>
         </div>
-        <div class="pane" id="pane_2" style="display: none">
-            <div id="video_container"></div>
-            <input type="button" value="Stop Call" id="quit" class="btn btn-danger btn-default btn-block">
-        </div>
-        <p id="locationData"></p>
-    <script>
-        var userId = '{{ user.username }}';
-        var userName = '{{ profile_data.name }}';
-        var remoteUserId = 'callee'
-    </script>
+    </div>
+
 <!--                    var remoteUserId = '{{ other_user.username }}'; -->
 
     <script type="text/javascript" src="{% static "js/conference.js" %}"></script>
     <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js"></script>
+    <script>
+        var userId = '{{ user.username }}';
+        var userName = '{{ profile_data.name }}';
+        var remoteUserId = '{{ other_user.username }}';
+    </script>
 </body>
 </html>

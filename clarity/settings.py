@@ -38,7 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
-    'debug_toolbar'
+    'debug_toolbar',
+    # 'haystack'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,3 +101,7 @@ except ImportError:
     pass
 
 LOGIN_REDIRECT_URL = 'home'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '761286703918742'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'b2e4e9b40782ef5b4d1e406ec434bfed'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile', 'user_friends', 'user_photos']

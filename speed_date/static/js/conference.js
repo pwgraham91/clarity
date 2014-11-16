@@ -215,3 +215,46 @@ var displayError = function (error) {
             break;
     }
 };
+
+// CHAT
+$(document).ready(function() {
+user_id = $('.chat_area').attr('id');
+dater_id = $('.user').attr('id');
+    function loadMessages_template() {
+//        console.log("loading");
+        $.ajax({
+            url: '../../chat_messages/'+dater_id,
+            type: 'GET',
+            success: function (data) {
+                $('.message_area').html(data)
+            }
+        });
+    }
+
+    loadMessages_template();
+    setInterval(loadMessages_template, 300);
+
+    $(".add_message").on("click", function () {
+        content = $('#message_id').val();
+        var new_message = {
+            message: content,
+            sender: user_id,
+            recipient: dater_id
+        };
+        new_message = JSON.stringify(new_message);
+        $.ajax({
+            url: '../../new_message/',
+            type: 'POST',
+            dataType: 'json',
+            data: new_message,
+            success: function (response) {
+                $('#message_id').val("");
+                console.log("hopefully worked")
+            }
+        });
+    });
+
+});
+    $("#newPerson").on("click", function () {
+        location.reload()
+    });

@@ -1,0 +1,11 @@
+#navLogo {
+    max-width: 80px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+.navbar {
+    background-color: #75C6DF;
+}
+.navLinks {
+    color: #FEFEFE !important;
+}

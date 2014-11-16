@@ -1,0 +1,5 @@
+<div class="message_area">
+    {% for message in messages %}
+        <p class="message">{{ message.sender.first_name }}: {{ message.message }}</p>
+    {% endfor %}
+</div>
