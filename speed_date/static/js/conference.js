@@ -261,6 +261,14 @@ $(document).ready(function() {
     setInterval(loadMessages_and_check_online, 300);
 
     $(".add_message").on("click", function () {
+        add_message()
+    });
+    $('#message_id').keypress(function(e) {
+        if(e.which == 13) {
+            add_message()
+        }
+    });
+    var add_message = function () {
         content = $('#message_id').val();
         if (typeof window.other_username === 'undefined'){
             other_user = dater_id;
@@ -283,7 +291,7 @@ $(document).ready(function() {
                 $('#message_id').val("");
             }
         });
-    });
+    };
 
 });
     $("#newPerson").on("click", function () {
