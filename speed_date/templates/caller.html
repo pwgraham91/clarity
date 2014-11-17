@@ -11,8 +11,8 @@
 
 </head>
 <body>
+    <div id="{{ other_user.id }}" class="user"></div>
     <div class="container">
-        <h1 id="{{ other_user.id }}" class="user">Chat with {{ other_user.first_name }}</h1>
         <button class="btn btn-primary" id="newPerson">Find Someone New</button>
         <div class="col-md-6">
             <div id='{{ user.id }}' class="chat_area">
@@ -41,13 +41,11 @@
         </div>
     </div>
 
-<!--                    var remoteUserId = '{{ other_user.username }}'; -->
-
     <script type="text/javascript" src="{% static "js/conference.js" %}"></script>
     <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js"></script>
     <script>
         var userId = '{{ user.username }}';
-        var userName = '{{ profile_data.name }}';
+        var userName = '{{ user.username }}';
         var remoteUserId = '{{ other_user.username }}';
     </script>
 </body>

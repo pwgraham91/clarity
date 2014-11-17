@@ -40,6 +40,8 @@ onBistriConferenceReady = function () {
         alert( error.text + " (" + error.code + ")" );
     } );
 
+//    TODO IN A ROOM
+
     // when the user has joined a room
     BistriConference.signaling.addHandler( "onJoinedRoom", function ( data ) {
         // set the current room name
@@ -50,6 +52,8 @@ onBistriConferenceReady = function () {
 			BistriConference.call( data.members[ i ].id, data.room );
 		}
     } );
+
+//    TODO OUT OF A ROOM
 
     // when an error occurred while trying to join a room
     BistriConference.signaling.addHandler( "onJoinRoomError", function ( error ) {
@@ -105,13 +109,16 @@ onBistriConferenceReady = function () {
             alert( "The user you try to reach is currently offline" );
         }
     } );
-
     // when a call request is received from remote user
     BistriConference.signaling.addHandler( "onIncomingRequest", function ( request ) {
 		// ask the user to accept or decline the invitation
 //		if( confirm( request.name + " is inviting you to join his conference room. Click \"Ok\" to start the call." ) ){
 			// invitation has been accepted
 			// ask the user to access to his webcam
+        console.log("connecting user local:");
+        console.log(request.name);
+        window.other_username = request.name;
+
 			 BistriConference.startStream( "webcamSD", function( localStream ){
 				// when webcam access has been granted
 				// show pane with id "pane_2"
@@ -122,8 +129,7 @@ onBistriConferenceReady = function () {
 				BistriConference.joinRoom( request.room );
 			} );
 //		}
-	} );
-
+	});
     // bind function "callUser" to button "Call XXX"
     q( "#call" ).addEventListener( "click", callUser );
 
@@ -220,26 +226,32 @@ var displayError = function (error) {
 $(document).ready(function() {
 user_id = $('.chat_area').attr('id');
 dater_id = $('.user').attr('id');
-    function loadMessages_template() {
-//        console.log("loading");
+    function loadMessages_and_check_online() {
+        console.log(window.other_username);
         $.ajax({
-            url: '../../chat_messages/'+dater_id,
+            url: '../../chat_messages/'+window.other_username,
             type: 'GET',
             success: function (data) {
                 $('.message_area').html(data)
             }
         });
+        $.ajax({
+            url: '../../online/',
+            type: 'GET',
+            success: function (data) {
+            }
+        });
     }
 
-    loadMessages_template();
-    setInterval(loadMessages_template, 300);
+    loadMessages_and_check_online();
+    setInterval(loadMessages_and_check_online, 1000);
 
     $(".add_message").on("click", function () {
         content = $('#message_id').val();
         var new_message = {
             message: content,
             sender: user_id,
-            recipient: dater_id
+            recipient: window.other_username
         };
         new_message = JSON.stringify(new_message);
         $.ajax({

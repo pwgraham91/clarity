@@ -9,8 +9,9 @@ urlpatterns = patterns('',
     url(r'^home/$', 'speed_date.views.home', name='home'),
     url(r'^loc/$', 'speed_date.views.loc', name='loc'),
     url('', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^chat_messages/(?P<dater_id>\w+)/$', 'speed_date.views.chat_messages', name='chat_messages'),
+    url(r'^chat_messages/(?P<dater_username>\w+)/$', 'speed_date.views.chat_messages', name='chat_messages'),
     url(r'^gender/(?P<user_gender>\w+)/(?P<user_preference>\w+)/$', 'speed_date.views.gender', name='gender'),
     url(r'^new_message/$', 'speed_date.views.new_message', name='new_message'),
+    url(r'^online/$', 'speed_date.views.online', name='online'),
 
 )
