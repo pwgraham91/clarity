@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <div id="{{ other_user.id }}" class="user"></div>
+    <div id="{{ other_user.username }}" class="user"></div>
     <div class="container">
         <button class="btn btn-primary" id="newPerson">Find Someone New</button>
         <div class="col-md-6">
@@ -19,9 +19,9 @@
                 <div class="message_area"></div>
                 <div class="send_message">
                     <input id='message_id' class="message_content" type="text"/>
-                   <div class="add_message">
-                       <input type="submit" value="Submit"/>
-                   </div>
+                    <div class="add_message">
+                        <input type="submit" value="Submit"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                     <img src="//lh4.ggpht.com/_BvM-WT-osti6_Zbk41eoASZV59HGwzGVSfhNGA-DAlw6fh_lxB7-soJdsbB2lkrvy8e677vFIFo-ReMOme5YQ=s0">
                 </div>
                 <div class="pane" id="pane_1" style="display: none">
-                    <input type="button" value="Call {{ other_user.first_name }}" id="call" class="btn btn-info btn-default btn-block">
+                    <input type="button" value="Get to Know Someone" id="call" class="btn btn-info btn-default btn-block">
                 </div>
                 <div class="pane" id="pane_2" style="display: none">
                     <div id="video_container"></div>

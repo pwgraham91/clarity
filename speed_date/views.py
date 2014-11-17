@@ -57,8 +57,8 @@ def caller(request):
         pass
     # Give me the first user in this list
     # For testing purposes, rewrite other_user to give me my alter FB account
-    all_users = User.objects.filter(first_name='Peter').exclude(email=request.user.email)
-    other_user = all_users[0]
+    # all_users = User.objects.filter(first_name='Peter').exclude(email=request.user.email)
+    # other_user = all_users[0]
     data = {
         'profile_data': profile_data,
         'friends': friends,
@@ -87,7 +87,7 @@ def chat_messages(request, dater_username):
     for message in message_received:
         messages.append(message)
     if len(messages) > 0:
-        messages.sort(key=lambda x: x.time, reverse=True)
+        messages.sort(key=lambda x: x.time, reverse=False)
     data = {
         'messages': messages,
         'target_dater': target_dater,
@@ -109,18 +109,22 @@ def new_message(request):
 
 
 def gender(request, user_gender, user_preference):
-    user = User.objects.get(email=request.user.email)
     user_gender = int(user_gender)
     user_preference = int(user_preference)
     if user_gender == 0:
-        user.gender = False
+        request.user.gender = False
     elif user_gender == 1:
-        user.gender = True
+        request.user.gender = True
+    request.user.save()
     if user_preference == 0:
-        user.preference = False
-    elif user_gender == 1:
-        user.preference = True
-    user.save()
+        request.user.preference = False
+        print 0
+    elif user_preference == 1:
+        request.user.preference = True
+        print 1
+    request.user.save()
+    print request.user.gender
+    print request.user.preference
     return HttpResponse("Gendered")
 
 def online(request):

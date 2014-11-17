@@ -224,12 +224,21 @@ var displayError = function (error) {
 
 // CHAT
 $(document).ready(function() {
-user_id = $('.chat_area').attr('id');
-dater_id = $('.user').attr('id');
+    user_id = $('.chat_area').attr('id');
+    dater_id = $('.user').attr('id');
     function loadMessages_and_check_online() {
         console.log(window.other_username);
+        if (typeof window.other_username === 'undefined'){
+            other_user = dater_id;
+            console.log('used daterid because undefined')
+        }
+        else {
+            other_user = window.other_username;
+            console.log('used window')
+
+        }
         $.ajax({
-            url: '../../chat_messages/'+window.other_username,
+            url: '../../chat_messages/'+other_user,
             type: 'GET',
             success: function (data) {
                 $('.message_area').html(data)
@@ -248,10 +257,19 @@ dater_id = $('.user').attr('id');
 
     $(".add_message").on("click", function () {
         content = $('#message_id').val();
+        if (typeof window.other_username === 'undefined'){
+            other_user = dater_id;
+            console.log('used daterid because undefined')
+        }
+        else {
+            other_user = window.other_username
+            console.log('used window')
+
+        }
         var new_message = {
             message: content,
             sender: user_id,
-            recipient: window.other_username
+            recipient: other_user
         };
         new_message = JSON.stringify(new_message);
         $.ajax({
