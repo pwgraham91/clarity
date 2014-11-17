@@ -1,5 +1,4 @@
 <div class="message_area">
-    <h1 id="{{ target_dater.username }}">Chat with {{ target_dater.first_name }}</h1>
     {% for message in messages %}
         <p class="message">{{ message.sender.first_name }}: {{ message.message }}</p>
     {% endfor %}

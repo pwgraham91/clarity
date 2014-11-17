@@ -227,14 +227,11 @@ $(document).ready(function() {
     user_id = $('.chat_area').attr('id');
     dater_id = $('.user').attr('id');
     function loadMessages_and_check_online() {
-        console.log(window.other_username);
         if (typeof window.other_username === 'undefined'){
             other_user = dater_id;
-            console.log('used daterid because undefined')
         }
         else {
             other_user = window.other_username;
-            console.log('used window')
 
         }
         $.ajax({
@@ -245,26 +242,31 @@ $(document).ready(function() {
             }
         });
         $.ajax({
+            url: '../../chat_with/'+other_user,
+            type: 'GET',
+            success: function (data) {
+                $('#chat_with').html(data)
+            }
+        });
+        $.ajax({
             url: '../../online/',
             type: 'GET',
             success: function (data) {
             }
         });
+        $(".message_area").scrollTop($(".message_area")[0].scrollHeight);
     }
 
     loadMessages_and_check_online();
-    setInterval(loadMessages_and_check_online, 1000);
+    setInterval(loadMessages_and_check_online, 300);
 
     $(".add_message").on("click", function () {
         content = $('#message_id').val();
         if (typeof window.other_username === 'undefined'){
             other_user = dater_id;
-            console.log('used daterid because undefined')
         }
         else {
-            other_user = window.other_username
-            console.log('used window')
-
+            other_user = window.other_username;
         }
         var new_message = {
             message: content,

@@ -1,4 +1,5 @@
 import json
+from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -11,7 +12,7 @@ from speed_date.models import User, Chat
 def index(request):
     return render(request, "index.html")
 
-
+@login_required
 def home(request):
     # Get facebook data from user
     user_social_auth = request.user.social_auth.filter(provider='facebook').first()
@@ -30,6 +31,7 @@ def home(request):
 
 # How to have someone else login on their own computer locally 10.12.4.254:8000/caller (will not work with facebook)
 # Only one caller page for RTC
+@login_required
 def caller(request):
     # Get Facebook information
     user_social_auth = request.user.social_auth.filter(provider='facebook').first()
@@ -67,15 +69,15 @@ def caller(request):
     }
     return render(request, "caller.html", data)
 
-
+@login_required
 def callee(request):
     return render(request, "callee.html")
 
+@login_required
 def loc(request):
     # pnt = Point(-95.23592948913574, 38.97127105172941)
     # imperial_d = D(mi=5)
     return render(request, "firebase_chat.html")
-
 
 def chat_messages(request, dater_username):
     target_dater = User.objects.get(username=dater_username)
@@ -94,6 +96,12 @@ def chat_messages(request, dater_username):
     }
     return render(request, 'chat_messages.html', data)
 
+def chat_with(request, dater_username):
+    target_dater = User.objects.get(username=dater_username)
+    data = {
+        'target_dater': target_dater,
+    }
+    return render(request, 'chat_with.html', data)
 
 @csrf_exempt
 def new_message(request):

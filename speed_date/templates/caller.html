@@ -1,22 +1,17 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-<!doctype html>
-<html>
-<head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+{% block title %}Meet{% endblock title %}
+{% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/caller.css' %}">
-    <style>
-
-    </style>
-
-</head>
-<body>
+{% endblock extra_head %}
+{% block content %}
     <div id="{{ other_user.username }}" class="user"></div>
     <div class="container">
         <button class="btn btn-primary" id="newPerson">Find Someone New</button>
         <div class="col-md-6">
             <div id='{{ user.id }}' class="chat_area">
-                <div class="message_area"></div>
+                <div id="chat_with"></div>
+                <div class="message_area" style="overflow-y: scroll; height: 200px"></div>
                 <div class="send_message">
                     <input id='message_id' class="message_content" type="text"/>
                     <div class="add_message">
@@ -48,5 +43,4 @@
         var userName = '{{ user.username }}';
         var remoteUserId = '{{ other_user.username }}';
     </script>
-</body>
-</html>
+{% endblock content %}
