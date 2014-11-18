@@ -97,9 +97,12 @@ def chat_messages(request, dater_username):
     return render(request, 'chat_messages.html', data)
 
 def chat_with(request, dater_username):
-    target_dater = User.objects.get(username=dater_username)
+    user = User.objects.get(email=request.user.email)
+    liked_one = User.objects.get(username=dater_username)
+    my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
+    my_match.save()
     data = {
-        'target_dater': target_dater,
+        'liked_one': liked_one,
     }
     return render(request, 'chat_with.html', data)
 
@@ -150,6 +153,7 @@ def liked(request, dater_username):
     my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
     my_match.save()
     return HttpResponse("liked")
+
 
 def mutual(request, dater_username):
     user = User.objects.get(email=request.user.email)
