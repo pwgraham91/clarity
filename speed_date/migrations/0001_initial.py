@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
             name='Match',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('user1_select', models.NullBooleanField()),
+                ('user1_select', models.BooleanField(default=False)),
                 ('chosen_user', models.ForeignKey(related_name='user_match_chosen', to=settings.AUTH_USER_MODEL)),
                 ('logged_user', models.ForeignKey(related_name='user_match_logged', to=settings.AUTH_USER_MODEL)),
             ],

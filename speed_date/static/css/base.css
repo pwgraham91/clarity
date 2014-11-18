@@ -9,3 +9,6 @@
 .navLinks {
     color: #FEFEFE !important;
 }
+body {
+    background-color: lightgray;
+}

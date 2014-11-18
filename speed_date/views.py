@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import facebook
 from datetime import datetime, timedelta
-from speed_date.models import User, Chat
+from speed_date.models import User, Chat, Match
 
 
 def index(request):
@@ -142,3 +142,18 @@ def online(request):
     print user.online
     user.save()
     return HttpResponse("online now")
+
+
+def liked(request, dater_username):
+    user = User.objects.get(email=request.user.email)
+    liked_one = User.objects.get(username=dater_username)
+    my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
+    my_match.save()
+    return HttpResponse("liked")
+
+def mutual(request, dater_username):
+    user = User.objects.get(email=request.user.email)
+    liked_one = User.objects.get(username=dater_username)
+    my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
+    my_match.save()
+    return HttpResponse("liked")

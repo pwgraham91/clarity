@@ -14,5 +14,8 @@ urlpatterns = patterns('',
     url(r'^gender/(?P<user_gender>\w+)/(?P<user_preference>\w+)/$', 'speed_date.views.gender', name='gender'),
     url(r'^new_message/$', 'speed_date.views.new_message', name='new_message'),
     url(r'^online/$', 'speed_date.views.online', name='online'),
+    url(r'^liked/(?P<dater_username>\w+)/$', 'speed_date.views.liked', name='liked'),
+    url(r'^mutual/(?P<dater_username>\w+)/$', 'speed_date.views.mutual', name='mutual'),
+
 
 )

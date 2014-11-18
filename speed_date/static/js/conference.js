@@ -221,34 +221,35 @@ var displayError = function (error) {
 // CHAT
 $(document).ready(function() {
 //$('#video_container').children().eq(1).css("opacity", .1);
-var clear = false;
+    var clear = false;
     user_id = $('.chat_area').attr('id');
     dater_id = $('.user').attr('id');
     function loadMessages_fade_video_and_check_online() {
-        if ($('#video_container').children().eq(1).length != 0 && clear == false){
+        if ($('#video_container').children().eq(1).length != 0 && clear == false) {
             clear = true;
             $('#video_container').children().eq(1).fadeIn(100000);
             console.log("fading")
         }
-        if (typeof window.other_username === 'undefined'){
+        if (typeof window.other_username === 'undefined') {
             other_user = dater_id;
         }
         else {
             other_user = window.other_username;
 
         }
-        if ($('#video_container').children().eq(1).length == 0){
+        if ($('#video_container').children().eq(1).length == 0) {
             clear = false
         }
         $.ajax({
-            url: '../../chat_messages/'+other_user,
+            url: '../../chat_messages/' + other_user,
             type: 'GET',
             success: function (data) {
                 $('.message_area').html(data)
+                $(".message_area").scrollTop($(".message_area")[0].scrollHeight);
             }
         });
         $.ajax({
-            url: '../../chat_with/'+other_user,
+            url: '../../chat_with/' + other_user,
             type: 'GET',
             success: function (data) {
                 $('#chat_with').html(data)
@@ -260,23 +261,25 @@ var clear = false;
             success: function (data) {
             }
         });
-        $(".message_area").scrollTop($(".message_area")[0].scrollHeight);
     }
 
     loadMessages_fade_video_and_check_online();
+    $(".message_area").scrollTop($(".message_area")[0].scrollHeight);
     setInterval(loadMessages_fade_video_and_check_online, 500);
 
     $(".add_message").on("click", function () {
         add_message()
     });
-    $('#message_id').keypress(function(e) {
-        if(e.which == 13) {
-            add_message()
+    $('#message_id').keypress(function (e) {
+        if (e.which == 13) {
+            add_message(function () {
+            })
+
         }
     });
     var add_message = function () {
         content = $('#message_id').val();
-        if (typeof window.other_username === 'undefined'){
+        if (typeof window.other_username === 'undefined') {
             other_user = dater_id;
         }
         else {
@@ -298,8 +301,23 @@ var clear = false;
             }
         });
     };
+    $("#liked").on("click", function () {
+        if (typeof window.other_username === 'undefined') {
+            other_user = dater_id;
+        }
+        else {
+            other_user = window.other_username;
+        }
+        $.ajax({
+            url: '../../liked/' + other_user,
+            type: 'GET',
+            success: function (data) {
+                console.log("liked!!!")
+            }
 
-});
+        });
+    });
     $("#newPerson").on("click", function () {
         location.reload()
     });
+});

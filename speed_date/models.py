@@ -27,7 +27,7 @@ class Match(models.Model):
 
     logged_user = models.ForeignKey(User, related_name='user_match_logged')
     chosen_user = models.ForeignKey(User, related_name='user_match_chosen')
-    user1_select = models.NullBooleanField()
+    user1_select = models.BooleanField(default=False)
 
     def __unicode__(self):
         return u"{} rated {} {}".format(self.logged_user, self.chosen_user, self.user1_select)
