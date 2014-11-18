@@ -8,6 +8,7 @@ class User(AbstractUser):
     gender = models.BooleanField(default=True)
     # want to give them an initial datetimefield that is now, then update it when they hit the chat site
     online = models.DateTimeField(auto_now_add=True)
+    link = models.CharField(max_length=150)
 
     def __unicode__(self):
         return u"{}".format(self.username)

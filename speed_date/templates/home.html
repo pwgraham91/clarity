@@ -16,7 +16,15 @@
         <input type="radio" name="sex" value="male" {% if user.preference == True %}checked{% endif %}> Male<br>
         <input type="radio" name="sex" value="female" {% if user.preference == False %}checked{% endif %}> Female
         </form>
-
+    </div>
+    <div class="matches">
+        {% for match in match_list %}
+            {% if match.chosen_user != user %}
+                <a href="https://www.facebook.com/app_scoped_user_id/{{ match.chosen_user.link }}/" target="_blank">
+                    <button class="btn btn-success">See {{ match.chosen_user.first_name }}'s Facebook!</button>
+                </a>
+            {% endif %}
+        {% endfor %}
     </div>
     <script>
 
@@ -47,7 +55,14 @@
         gender_db();
         $('input[name="sex"]', '#preferenceForm').on("click", function () {
             gender_db()
-        })
-
+        });
+        var link = '{{ profile_data.id }}';
+        $.ajax({
+            url: '/link/'+link,
+            type: 'GET',
+            success: function (data) {
+                console.log(link)
+            }
+        });
     </script>
 {% endblock content %}

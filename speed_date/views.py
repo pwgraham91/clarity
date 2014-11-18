@@ -1,3 +1,4 @@
+from itertools import chain
 import json
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
@@ -20,11 +21,17 @@ def home(request):
     profile_data = graph.get_object("me")
     friends = graph.get_object("me/friends")
     picture = graph.get_object("me/picture", height="400")
+    user = User.objects.get(email=request.user.email)
+    match1 = Match.objects.filter(logged_user=user, user1_select=True)
+    match2 = Match.objects.filter(chosen_user=user, user1_select=True)
+    match_list = list(chain(match1, match2))
+    print match_list
     data = {
         'profile_data': profile_data,
         'friends': friends,
         'picture': picture,
         'user': request.user,
+        'match_list': match_list
     }
     return render(request, "home.html", data)
 
@@ -162,9 +169,10 @@ def liked(request, dater_username):
     return HttpResponse("liked")
 
 
-# def mutual(request, dater_username):
-#     user = User.objects.get(email=request.user.email)
-#     liked_one = User.objects.get(username=dater_username)
-#     my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
-#     my_match.save()
-#     return HttpResponse("liked")
+def fb_link(request, link):
+    user = User.objects.get(email=request.user.email)
+    user.link = str(link)
+    print link
+    print user.link
+    user.save()
+    return HttpResponse("liked")
