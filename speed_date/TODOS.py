@@ -1,5 +1,7 @@
 __author__ = 'GoldenGate'
 """
+14) Connect to facebook button links to their facebook and show matches on home page
+15) Ask Randall why when I reload runnable it drops my database
 7) If the users like each other, link to their facebook
 10) Home gives you a list of links to people who share a mutual attraction
 2) Nice Looking Front Page

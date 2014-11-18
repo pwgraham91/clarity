@@ -99,9 +99,16 @@ def chat_messages(request, dater_username):
 def chat_with(request, dater_username):
     user = User.objects.get(email=request.user.email)
     liked_one = User.objects.get(username=dater_username)
-    my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
-    my_match.save()
+    match = 0
+    try:
+        my_match = Match.objects.get(logged_user=user, chosen_user=liked_one)
+        their_match = Match.objects.get(logged_user=liked_one, chosen_user=user)
+        if my_match.user1_select and their_match.user1_select:
+            match = True
+    except Match.DoesNotExist:
+        match = False
     data = {
+        'match': match,
         'liked_one': liked_one,
     }
     return render(request, 'chat_with.html', data)
@@ -155,9 +162,9 @@ def liked(request, dater_username):
     return HttpResponse("liked")
 
 
-def mutual(request, dater_username):
-    user = User.objects.get(email=request.user.email)
-    liked_one = User.objects.get(username=dater_username)
-    my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
-    my_match.save()
-    return HttpResponse("liked")
+# def mutual(request, dater_username):
+#     user = User.objects.get(email=request.user.email)
+#     liked_one = User.objects.get(username=dater_username)
+#     my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
+#     my_match.save()
+#     return HttpResponse("liked")

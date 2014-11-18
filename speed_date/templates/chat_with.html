@@ -1,4 +1,6 @@
 <h2 id="{{ liked_one.username }}">Chat with {{ liked_one.first_name }}</h2>
+{% if match %}
 <p>{{ liked_one.first_name }} Likes You Too!</p> <button class="btn btn-success">See {{ liked_one.first_name }}'s Facebook!</button>
+{% endif %}
 <br>
 <br>
