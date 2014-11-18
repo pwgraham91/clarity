@@ -5,3 +5,10 @@
 video {
     width: 100%;
 }
+
+#video_container > video:last-child {
+    display: none; !important;
+}
+#video_container > video:first-child {
+    display: inline-block; !important;
+}

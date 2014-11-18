@@ -19,8 +19,8 @@ onBistriConferenceReady = function () {
     // if you don't have your own, you can get them at:
     // https://api.developers.bistri.com/login
     BistriConference.init( {
-        appId: "71a84bf4",
-        appKey: "397b1f49af73d14408edf8dc53e0691a",
+        appId: "96ce4396",
+        appKey: "a5408fe55d6a1f476d279c353f195562",
         userId: userId,
         userName: userName,
 		debug: true
@@ -40,8 +40,6 @@ onBistriConferenceReady = function () {
         alert( error.text + " (" + error.code + ")" );
     } );
 
-//    TODO IN A ROOM
-
     // when the user has joined a room
     BistriConference.signaling.addHandler( "onJoinedRoom", function ( data ) {
         // set the current room name
@@ -51,9 +49,7 @@ onBistriConferenceReady = function () {
 			// ... request a call
 			BistriConference.call( data.members[ i ].id, data.room );
 		}
-    } );
-
-//    TODO OUT OF A ROOM
+        });
 
     // when an error occurred while trying to join a room
     BistriConference.signaling.addHandler( "onJoinRoomError", function ( error ) {
@@ -224,15 +220,25 @@ var displayError = function (error) {
 
 // CHAT
 $(document).ready(function() {
+//$('#video_container').children().eq(1).css("opacity", .1);
+var clear = false;
     user_id = $('.chat_area').attr('id');
     dater_id = $('.user').attr('id');
-    function loadMessages_and_check_online() {
+    function loadMessages_fade_video_and_check_online() {
+        if ($('#video_container').children().eq(1).length != 0 && clear == false){
+            clear = true;
+            $('#video_container').children().eq(1).fadeIn(100000);
+            console.log("fading")
+        }
         if (typeof window.other_username === 'undefined'){
             other_user = dater_id;
         }
         else {
             other_user = window.other_username;
 
+        }
+        if ($('#video_container').children().eq(1).length == 0){
+            clear = false
         }
         $.ajax({
             url: '../../chat_messages/'+other_user,
@@ -257,8 +263,8 @@ $(document).ready(function() {
         $(".message_area").scrollTop($(".message_area")[0].scrollHeight);
     }
 
-    loadMessages_and_check_online();
-    setInterval(loadMessages_and_check_online, 300);
+    loadMessages_fade_video_and_check_online();
+    setInterval(loadMessages_fade_video_and_check_online, 500);
 
     $(".add_message").on("click", function () {
         add_message()

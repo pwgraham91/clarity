@@ -1,6 +1,5 @@
 __author__ = 'GoldenGate'
 """
-7) Blur video box
 7) If the users like each other, link to their facebook
 10) Home gives you a list of links to people who share a mutual attraction
 2) Nice Looking Front Page

@@ -135,6 +135,7 @@ def gender(request, user_gender, user_preference):
     print request.user.preference
     return HttpResponse("Gendered")
 
+
 def online(request):
     user = User.objects.get(email=request.user.email)
     user.online = datetime.now()
