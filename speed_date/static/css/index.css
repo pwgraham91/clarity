@@ -10,8 +10,7 @@
     background-image: url("http://thirtyorsomething.com/wp-content/uploads/2014/05/OnlineDating1.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 105%;
-    margin-top: -100px;
+    height: 100%;
 }
 
 html, body {
