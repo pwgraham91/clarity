@@ -42,7 +42,7 @@ def home(request):
 @login_required
 def caller(request):
     if request.user.banned or not request.user.fifty:
-        return HttpResponse("You've been banned for explicit content or you don't have at least 50 friends")
+        return HttpResponse("You've been banned for explicit content or you don't have at least 25 friends")
     else:
         # Get Facebook information
         user_social_auth = request.user.social_auth.filter(provider='facebook').first()
@@ -187,7 +187,7 @@ def flag(request, offensive):
 
 def fifty(request, friends):
     user = User.objects.get(email=request.user.email)
-    if int(friends) < 50:
+    if int(friends) < 25:
         user.fifty = False
         user.save()
         return HttpResponse("Fifty False")
