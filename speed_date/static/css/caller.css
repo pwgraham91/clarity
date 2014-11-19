@@ -7,7 +7,7 @@ video {
 }
 
 #video_container > video:first-child {
-    display: inline-block; !important;
+    display: block !important;
 }
 #video_container > video:last-child {
     display: none;

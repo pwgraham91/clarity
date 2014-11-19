@@ -226,7 +226,7 @@ $(document).ready(function() {
     function loadMessages_fade_video_and_check_online() {
         if ($('#video_container').children().eq(1).length != 0 && clear == false) {
             clear = true;
-            $('#video_container').children().eq(1).fadeIn(100000);
+            $('#video_container').children().eq(1).fadeIn(100000).css('display', 'block');
             console.log("fading")
         }
         if (typeof window.other_username === 'undefined') {

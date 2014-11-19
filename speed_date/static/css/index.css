@@ -1,0 +1,9 @@
+.login {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.jumbotron {
+    background-image: url("http://thirtyorsomething.com/wp-content/uploads/2014/05/OnlineDating1.jpg");
+}

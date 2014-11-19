@@ -1,8 +1,35 @@
-{% extends 'base.html' %}
-{% block content %}
-    {% if not user.is_authenticated %}
-        <a href="{% url "social:begin" "facebook" %}">Facebook Login</a>
-    {% else %}
-        <a href="{% url "home" %}">Home</a>
-    {% endif %}
-{% endblock content %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Clarity {% block title %}{% endblock title %}</title>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+</head>
+    <body>
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand navbar-left" href={% url "index" %}><img id='navLogo' width="100px" src="//lh4.ggpht.com/_BvM-WT-osti6_Zbk41eoASZV59HGwzGVSfhNGA-DAlw6fh_lxB7-soJdsbB2lkrvy8e677vFIFo-ReMOme5YQ=s0"></a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a id="meetSomeone" class="navbar-brand navLinks" href={% url "caller" %}>Meet Someone</a></li>
+            <li><a class="navbar-brand navLinks" href={% url "home" %}>Home</a></li>
+        </ul>
+    </div>
+</nav>
+    <div class="login">
+        {% if not user.is_authenticated %}
+            <a href="{% url "social:begin" "facebook" %}"><img id="fbLogin" width="300px" src="//nitelygigs.com/images/FacebookButton.png"></a>
+        {% else %}
+            <a href="{% url "home" %}">Home</a>
+        {% endif %}
+    </div>
+    <div class="jumbotron">
+
+    </div>

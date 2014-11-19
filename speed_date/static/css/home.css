@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+}
+img {
+    float: left;
+    margin-right: 10px;
+    width: 320px;
+}
+#sorry {
+    color: red;
+}
+#noDot {
+    list-style-type: none;
+}
+
+.col-centered {
+    display:inline-block;
+    float: right;
+    /* reset the text-align */
+    text-align:right;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
