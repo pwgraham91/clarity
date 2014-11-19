@@ -25,7 +25,6 @@ def home(request):
     match1 = Match.objects.filter(logged_user=user, user1_select=True)
     match2 = Match.objects.filter(chosen_user=user, user1_select=True)
     match_list = list(chain(match1, match2))
-    print match_list
     data = {
         'profile_data': profile_data,
         'friends': friends,
@@ -58,12 +57,13 @@ def caller(request):
         # 4) on the chat page in the last 5 seconds and 5) exclude myself
         # Try with
         all_users = User.objects.filter(gender=user_preference).\
-            filter(preference=user_gender).order_by('?').exclude(email=request.user.email)
+            filter(preference=user_gender).filter(banned=False).\
+            filter(fifty=True).order_by('?').exclude(email=request.user.email)
         other_user = all_users[0]
         try:
             all_users = User.objects.filter(gender=user_preference).\
                 filter(preference=user_gender).filter(online=recent_range).\
-                order_by('?').exclude(email=request.user.email)
+                filter(banned=False).filter(fifty=True).order_by('?').exclude(email=request.user.email)
             other_user = all_users[0]
         except:
             pass
@@ -150,15 +150,12 @@ def gender(request, user_gender, user_preference):
     elif user_preference == 1:
         request.user.preference = True
     request.user.save()
-    print request.user.gender
-    print request.user.preference
     return HttpResponse("Gendered")
 
 
 def online(request):
     user = User.objects.get(email=request.user.email)
     user.online = datetime.now()
-    print user.online
     user.save()
     return HttpResponse("online now")
 
@@ -168,7 +165,6 @@ def liked(request, dater_username):
     liked_one = User.objects.get(username=dater_username)
     try:
         my_match = Match.objects.get(logged_user=user, chosen_user=liked_one, user1_select=True)
-        print "match already created"
     except Match.DoesNotExist:
         Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
     return HttpResponse("liked")

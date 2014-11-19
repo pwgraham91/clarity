@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block title %}Home{% endblock title %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+{% endblock extra_head %}
 {% block content %}
-    <h1>Clarity Speed Dating</h1>
+    <h1>Clarity Video Dating</h1>
     <div class="info">
-        <p>Hi {{ profile_data.name }}!</p>
-        <p>Link</p>
-        <p>{{ user.social_id }}</p>
+        <h2>Hi {{ profile_data.name }}!</h2>
         <p>Friends = {{ friends.summary.total_count }}</p>
         <p>ID = {{ profile_data.id }}</p>
         <a href="{{ profile_data.link }}">Link to FB</a>

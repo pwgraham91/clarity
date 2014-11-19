@@ -190,7 +190,6 @@ var displayLocation = function (position) {
     var displayText = "User latitude is " + position.coords.latitude + " and longitude is " + position.coords.longitude;
 
     //display the string for demonstration
-    document.getElementById("locationData").innerHTML = displayText;
 };
 
 var displayError = function (error) {
