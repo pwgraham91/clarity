@@ -5,11 +5,11 @@
 }
 .navbar {
     background-color: #75C6DF;
-    border-radius: 40px;
+    /*border-radius: 40px;*/
 }
 .navLinks {
     color: #FEFEFE !important;
 }
 body {
-    background-color: lightgray;
+    background-color: rgba(236, 236, 236, 0.48);
 }

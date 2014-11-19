@@ -1,6 +1,6 @@
 .login {
     display: block;
-    margin-top: 300px;
+    margin-top: 10px;
     margin-left: auto;
     margin-right: 20px;
     text-align: center;
@@ -16,10 +16,19 @@
 
 html, body {
      height: 100%;
- }
+}
+
+.jumboTitle {
+    text-align: center;
+}
+
+#clarityTitle {
+    font-size: 60px;
+    margin-top: 100px;
+}
 
 .section1 {
-    background-color: #ff6671;
+    background-color: #ff4d54;
     margin-top: -30px;
     height: 380px;
     text-align: center;
@@ -30,7 +39,7 @@ img {
 }
 
 .section2 {
-    background-color: #8965ef;
+    background-color: #605bff;
     margin-top: -30px;
     height: 380px;
     text-align: center;
@@ -41,12 +50,12 @@ h2, h3, h4 {
 
 #connectLeft {
     text-align: left;
-    margin-left: 37px;
-    margin-right: -37px;
+    left: 21px;
+    /*margin-right: -37px;*/
 }
 
 #connectRight {
     text-align: right;
-    margin-left: 37px;
-    margin-right: -37px;
+    left: 100px;
+    /*margin-right: 1000px;*/
 }
