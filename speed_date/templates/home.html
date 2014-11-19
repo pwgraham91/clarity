@@ -17,9 +17,9 @@
             <input type="radio" name="sex" value="male" {% if user.preference == True %}checked{% endif %}> Male<br>
             <input type="radio" name="sex" value="female" {% if user.preference == False %}checked{% endif %}> Female
         </form>
-        {% if friends.summary.total_count < 50 %}
+        {% if friends.summary.total_count < 25 %}
             <h3>Friends: {{ friends.summary.total_count }}</h3>
-            <p id="sorry">Sorry, you must have at least 50 facebook friends to participate</p>
+            <p id="sorry">Sorry, you must have at least 25 facebook friends to participate</p>
         {% else %}
             <a id="meetSomeone" class="navbar-brand navLinks" href={% url "caller" %}><button id="CTAButton" class="btn btn-primary">Meet Someone</button></a>
         {% endif %}
