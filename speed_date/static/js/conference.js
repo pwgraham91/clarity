@@ -312,10 +312,27 @@ $(document).ready(function() {
             url: '../../liked/' + other_user,
             type: 'GET',
             success: function (data) {
-                console.log("liked!!!")
+                $("#liked").html("Liked!")
             }
-
         });
+    });
+    $("#flag").on("click", function () {
+        if (typeof window.other_username === 'undefined') {
+            other_user = dater_id;
+        }
+        else {
+            other_user = window.other_username;
+        }
+        var response = confirm("Are you sure you want to flag this user? Please flag only for explicit content");
+        if (response == true){
+            $.ajax({
+                url: '../../flag/' + other_user,
+                type: 'GET',
+                success: function (data) {
+                    $("#flag").html("Flagged")
+                }
+            });
+        }
     });
     $("#newPerson").on("click", function () {
         location.reload()

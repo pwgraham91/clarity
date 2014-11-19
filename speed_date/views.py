@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import facebook
 from datetime import datetime, timedelta
-from speed_date.models import User, Chat, Match
+from speed_date.models import User, Chat, Match, Flag
 
 
 def index(request):
@@ -40,41 +40,45 @@ def home(request):
 # Only one caller page for RTC
 @login_required
 def caller(request):
-    # Get Facebook information
-    user_social_auth = request.user.social_auth.filter(provider='facebook').first()
-    graph = facebook.GraphAPI(user_social_auth.extra_data['access_token'])
-    profile_data = graph.get_object("me")
-    friends = graph.get_object("me/friends")
-    picture = graph.get_object("me/picture", height="400")
-    # Filtering by gender and preference
-    user_gender = request.user.gender
-    user_preference = request.user.preference
-    # Filter by recently online users
-    recent_range = datetime.now() - timedelta(seconds=5)
-    # show a list of users who 1) fit my preference 2) whose preference fits me 3) randomly
-    # 4) on the chat page in the last 5 seconds and 5) exclude myself
-    # Try with
-    all_users = User.objects.filter(gender=user_preference).\
-        filter(preference=user_gender).order_by('?').exclude(email=request.user.email)
-    other_user = all_users[0]
-    try:
+    if request.user.banned or not request.user.fifty:
+        return HttpResponse("You've been banned for explicit content or you don't have at least 50 friends")
+    else:
+        # Get Facebook information
+        user_social_auth = request.user.social_auth.filter(provider='facebook').first()
+        graph = facebook.GraphAPI(user_social_auth.extra_data['access_token'])
+        profile_data = graph.get_object("me")
+        friends = graph.get_object("me/friends")
+        picture = graph.get_object("me/picture", height="400")
+        # Filtering by gender and preference
+        user_gender = request.user.gender
+        user_preference = request.user.preference
+        # Filter by recently online users
+        recent_range = datetime.now() - timedelta(seconds=5)
+        # show a list of users who 1) fit my preference 2) whose preference fits me 3) randomly
+        # 4) on the chat page in the last 5 seconds and 5) exclude myself
+        # Try with
         all_users = User.objects.filter(gender=user_preference).\
-            filter(preference=user_gender).filter(online=recent_range).\
-            order_by('?').exclude(email=request.user.email)
+            filter(preference=user_gender).order_by('?').exclude(email=request.user.email)
         other_user = all_users[0]
-    except:
-        pass
-    # Give me the first user in this list
-    # For testing purposes, rewrite other_user to give me my alter FB account
-    # all_users = User.objects.filter(first_name='Peter').exclude(email=request.user.email)
-    # other_user = all_users[0]
-    data = {
-        'profile_data': profile_data,
-        'friends': friends,
-        'picture': picture,
-        'other_user': other_user
-    }
-    return render(request, "caller.html", data)
+        try:
+            all_users = User.objects.filter(gender=user_preference).\
+                filter(preference=user_gender).filter(online=recent_range).\
+                order_by('?').exclude(email=request.user.email)
+            other_user = all_users[0]
+        except:
+            pass
+        # Give me the first user in this list
+        # For testing purposes, rewrite other_user to give me my alter FB account
+        # all_users = User.objects.filter(first_name='Peter').exclude(email=request.user.email)
+        # other_user = all_users[0]
+        data = {
+            'profile_data': profile_data,
+            'friends': friends,
+            'picture': picture,
+            'other_user': other_user
+        }
+        return render(request, "caller.html", data)
+
 
 @login_required
 def callee(request):
@@ -143,10 +147,8 @@ def gender(request, user_gender, user_preference):
     request.user.save()
     if user_preference == 0:
         request.user.preference = False
-        print 0
     elif user_preference == 1:
         request.user.preference = True
-        print 1
     request.user.save()
     print request.user.gender
     print request.user.preference
@@ -164,15 +166,38 @@ def online(request):
 def liked(request, dater_username):
     user = User.objects.get(email=request.user.email)
     liked_one = User.objects.get(username=dater_username)
-    my_match = Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
-    my_match.save()
+    try:
+        my_match = Match.objects.get(logged_user=user, chosen_user=liked_one, user1_select=True)
+        print "match already created"
+    except Match.DoesNotExist:
+        Match.objects.create(logged_user=user, chosen_user=liked_one, user1_select=True)
     return HttpResponse("liked")
 
 
 def fb_link(request, link):
     user = User.objects.get(email=request.user.email)
-    user.link = str(link)
-    print link
-    print user.link
+    user.new_link = int(link)
     user.save()
-    return HttpResponse("liked")
+    return HttpResponse("link liked")
+
+
+def flag(request, offensive):
+    user = User.objects.get(email=request.user.email)
+    flagged = User.objects.get(username=offensive)
+    try:
+        my_flag = Flag.objects.get(offensive_user=flagged, offended_user=user)
+    except Flag.DoesNotExist:
+        Flag.objects.create(offensive_user=flagged, offended_user=user)
+    return HttpResponse("Flagged")
+
+
+def fifty(request, friends):
+    user = User.objects.get(email=request.user.email)
+    if int(friends) < 50:
+        user.fifty = False
+        user.save()
+        return HttpResponse("Fifty False")
+    else:
+        user.fifty = True
+        user.save()
+        return HttpResponse("Fifty True")

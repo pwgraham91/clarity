@@ -4,6 +4,8 @@
     <h1>Clarity Speed Dating</h1>
     <div class="info">
         <p>Hi {{ profile_data.name }}!</p>
+        <p>Link</p>
+        <p>{{ user.social_id }}</p>
         <p>Friends = {{ friends.summary.total_count }}</p>
         <p>ID = {{ profile_data.id }}</p>
         <a href="{{ profile_data.link }}">Link to FB</a>
@@ -19,9 +21,9 @@
     </div>
     <div class="matches">
         {% for match in match_list %}
-            {% if match.chosen_user != user %}
-                <a href="https://www.facebook.com/app_scoped_user_id/{{ match.chosen_user.link }}/" target="_blank">
-                    <button class="btn btn-success">See {{ match.chosen_user.first_name }}'s Facebook!</button>
+            {% if match.logged_user != user %}
+                <a href="https://www.facebook.com/app_scoped_user_id/{{ match.logged_user.link }}/" target="_blank">
+                    <button class="btn btn-success">See {{ match.logged_user.first_name }}'s Facebook!</button>
                 </a>
             {% endif %}
         {% endfor %}
@@ -49,20 +51,27 @@
                 type: 'GET',
                 success: function (data) {
                     console.log('gender' + gender_boolean + 'gender_preference' + gender_preference)
+                    var link = '{{ profile_data.id }}';
+                    link = link.toString();
+                    $.ajax({
+                        url: '../../fb_link/'+link,
+                        success: function (data) {
+                            console.log(data);
+                            $.ajax({
+                                url: '../../fifty/'+'{{ friends.summary.total_count }}',
+                                success: function (data) {
+                                    console.log(data);
+                                    console.log({{ friends.summary.total_count }})
+                                }
+                            });
+                        }
+                    });
                 }
             });
         };
         gender_db();
         $('input[name="sex"]', '#preferenceForm').on("click", function () {
             gender_db()
-        });
-        var link = '{{ profile_data.id }}';
-        $.ajax({
-            url: '/link/'+link,
-            type: 'GET',
-            success: function (data) {
-                console.log(link)
-            }
         });
     </script>
 {% endblock content %}

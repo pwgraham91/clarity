@@ -31,7 +31,9 @@ class Migration(migrations.Migration):
                 ('preference', models.BooleanField(default=False)),
                 ('gender', models.BooleanField(default=True)),
                 ('online', models.DateTimeField(auto_now_add=True)),
-                ('link', models.CharField(max_length=150)),
+                ('link', models.TextField(default=b'my_link')),
+                ('banned', models.BooleanField(default=False)),
+                ('fifty', models.BooleanField(default=True)),
                 ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of his/her group.', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions')),
             ],
@@ -50,6 +52,17 @@ class Migration(migrations.Migration):
                 ('time', models.DateTimeField(auto_now_add=True)),
                 ('recipient', models.ForeignKey(related_name='user_recipient', to=settings.AUTH_USER_MODEL)),
                 ('sender', models.ForeignKey(related_name='user_sender', to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Flag',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('offended_user', models.ForeignKey(related_name='flag_offended', to=settings.AUTH_USER_MODEL)),
+                ('offensive_user', models.ForeignKey(related_name='flag_offensive', to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },

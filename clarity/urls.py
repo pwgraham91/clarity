@@ -15,7 +15,10 @@ urlpatterns = patterns('',
     url(r'^new_message/$', 'speed_date.views.new_message', name='new_message'),
     url(r'^online/$', 'speed_date.views.online', name='online'),
     url(r'^liked/(?P<dater_username>\w+)/$', 'speed_date.views.liked', name='liked'),
-    url(r'^link/(?P<link>\w+)/$', 'speed_date.views.fb_link', name='fb_link'),
+    url(r'^flag/(?P<offensive>\w+)/$', 'speed_date.views.flag', name='flag'),
+    url(r'^fifty/(?P<friends>\w+)/$', 'speed_date.views.fifty', name='fifty'),
+    url(r'^fb_link/(?P<link>\w+)/$', 'speed_date.views.fb_link', name='fb_link'),
+
 
 
 )
