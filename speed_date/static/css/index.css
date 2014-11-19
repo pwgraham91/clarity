@@ -5,9 +5,8 @@
     margin-right: 20px;
     text-align: center;
 }
-
 .jumbotron {
-    background-image: url("http://thirtyorsomething.com/wp-content/uploads/2014/05/OnlineDating1.jpg");
+    background-image: url("http://i61.tinypic.com/23j3gc2.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -38,7 +37,7 @@ img {
 }
 
 .section2 {
-    background-color: #605bff;
+    background-color: #014AA6;
     margin-top: -30px;
     height: 380px;
     text-align: center;
@@ -57,4 +56,22 @@ h2, h3, h4 {
     text-align: right;
     left: 97px;
     /*margin-right: 1000px;*/
+}
+
+.section3 {
+    background-color: #609e4b;
+    margin-top: -30px;
+    height: 380px;
+    text-align: center;
+}
+
+#matchLeft {
+    text-align: left;
+    width: 500px;
+    margin-left: 23px;
+}
+
+#matchRight {
+    text-align: right;
+    margin-left: 7px;
 }
