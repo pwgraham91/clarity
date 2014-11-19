@@ -3,12 +3,24 @@
     text-align: center;
 }
 video {
-    width: 100%;
+    width: 50%;
 }
 
 #video_container > video:first-child {
     display: block !important;
+    float: left;
 }
 #video_container > video:last-child {
     display: none;
+    float: right;
+}
+
+.add_message {
+    padding-top: 10px;
+}
+
+.message_area {
+    border: 2px solid #515151;
+    margin-bottom: 10px;
+    padding: 5px;
 }

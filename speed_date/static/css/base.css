@@ -13,3 +13,6 @@
 body {
     background-color: rgba(236, 236, 236, 0.48);
 }
+a, p {
+    font-family: Verdana;
+}

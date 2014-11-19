@@ -5,35 +5,35 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/caller.css' %}">
 {% endblock extra_head %}
 {% block content %}
+    <div class="col-md-9">
+        <div class="pane" id="pane_0">
+            <img src="//lh4.ggpht.com/_BvM-WT-osti6_Zbk41eoASZV59HGwzGVSfhNGA-DAlw6fh_lxB7-soJdsbB2lkrvy8e677vFIFo-ReMOme5YQ=s0">
+        </div>
+        <div class="pane" id="pane_1" style="display: none">
+            <input type="button" value="Get to Know Someone" id="call" class="btn btn-info btn-default btn-block">
+        </div>
+        <div class="pane" id="pane_2" style="display: none">
+            <div id="video_container"></div>
+            <input type="button" value="Stop Call" id="quit" class="btn btn-danger btn-default btn-block">
+        </div>
+    </div>
+    <div class="col-md-3">
     <div id="{{ other_user.username }}" class="user"></div>
         <button class="btn btn-primary" id="newPerson">Find Someone New</button>
         <button class="btn btn-primary" id="liked">I Like This One</button>
         <button class="btn btn-primary" id="flag">Flag</button>
-        <div class="col-md-6">
-            <div id='{{ user.id }}' class="chat_area">
-                <div id="chat_with"></div>
-                <div class="message_area" style="overflow-y: scroll; height: 200px"></div>
-                <div class="send_message">
-                    <input id='message_id' class="message_content" type="text"/>
-                    <div class="add_message">
-                        <input type="submit" value="Submit"/>
-                    </div>
+        <div id='{{ user.id }}' class="chat_area">
+            <div id="chat_with"></div>
+            <div class="message_area" style="overflow-y: scroll; height: 200px"></div>
+            <div class="send_message">
+                <input id='message_id' class="message_content" type="text"/>
+                <div class="add_message">
+                    <input type="button" value="Send" class="btn btn-primary">
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-                <div class="pane" id="pane_0">
-                    <img src="//lh4.ggpht.com/_BvM-WT-osti6_Zbk41eoASZV59HGwzGVSfhNGA-DAlw6fh_lxB7-soJdsbB2lkrvy8e677vFIFo-ReMOme5YQ=s0">
-                </div>
-                <div class="pane" id="pane_1" style="display: none">
-                    <input type="button" value="Get to Know Someone" id="call" class="btn btn-info btn-default btn-block">
-                </div>
-                <div class="pane" id="pane_2" style="display: none">
-                    <div id="video_container"></div>
-                    <input type="button" value="Stop Call" id="quit" class="btn btn-danger btn-default btn-block">
-                </div>
+    </div>
 
-        </div>
     <script type="text/javascript" src="{% static "js/conference.js" %}"></script>
     <script type="text/javascript" src="https://api.bistri.com/bistri.conference.min.js"></script>
     <script>
