@@ -1,9 +1,52 @@
 .login {
     display: block;
-    margin: auto;
+    margin-top: 300px;
+    margin-left: auto;
+    margin-right: 20px;
     text-align: center;
 }
 
 .jumbotron {
     background-image: url("http://thirtyorsomething.com/wp-content/uploads/2014/05/OnlineDating1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 105%;
+    margin-top: -100px;
+}
+
+html, body {
+     height: 100%;
+ }
+
+.section1 {
+    background-color: #ff6671;
+    margin-top: -30px;
+    height: 380px;
+    text-align: center;
+}
+img {
+    margin: 0 auto;
+
+}
+
+.section2 {
+    background-color: #8965ef;
+    margin-top: -30px;
+    height: 380px;
+    text-align: center;
+}
+h2, h3, h4 {
+    color: #e6e6e6;
+}
+
+#connectLeft {
+    text-align: left;
+    margin-left: 37px;
+    margin-right: -37px;
+}
+
+#connectRight {
+    text-align: right;
+    margin-left: 37px;
+    margin-right: -37px;
 }

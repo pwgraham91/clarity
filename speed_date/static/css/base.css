@@ -5,6 +5,7 @@
 }
 .navbar {
     background-color: #75C6DF;
+    border-radius: 40px;
 }
 .navLinks {
     color: #FEFEFE !important;
