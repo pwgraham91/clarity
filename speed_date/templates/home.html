@@ -6,27 +6,30 @@
 {% endblock extra_head %}
 {% block content %}
     <h1>Clarity Video Dating</h1>
-    <div class="col-md-6" id="info">
+    <div class="col-md-4" id="info">
+        <h3>Hi {{ profile_data.name }}!</h3>
         <img src="{{ picture.url }}">
-        <h2>Hi {{ profile_data.name }}!</h2>
-        <h3>Gender Preference</h3>
+    </div>
+    <div class="col-md-4 col-centered" id="CTA">
+        <h3 class="CTACenter">Gender Preference</h3>
         <form action="" id="preferenceForm">
-        <input type="radio" name="sex" value="male" {% if user.preference == True %}checked{% endif %}> Male<br>
-        <input type="radio" name="sex" value="female" {% if user.preference == False %}checked{% endif %}> Female
+            <input type="radio" name="sex" value="male" {% if user.preference == True %}checked{% endif %}> Male<br>
+            <input type="radio" name="sex" value="female" {% if user.preference == False %}checked{% endif %}> Female
         </form>
         {% if friends.summary.total_count < 50 %}
-        <h3>Friends: {{ friends.summary.total_count }}</h3>
-        <p id="sorry">Sorry, you must have at least 50 facebook friends to participate</p>
+            <h3>Friends: {{ friends.summary.total_count }}</h3>
+            <p id="sorry">Sorry, you must have at least 50 facebook friends to participate</p>
+        {% else %}
+            <a id="meetSomeone" class="navbar-brand navLinks" href={% url "caller" %}><button id="CTAButton" class="btn btn-primary">Meet Someone</button></a>
         {% endif %}
-
     </div>
-    <div class="col-md-6 col-centered" id="matches">
-        <h2>Matches</h2>
+    <div class="col-md-4" id="matches">
+        <h3>Matches</h3>
         {% for match in match_list %}
             <ul id="noDot">
             {% if match.logged_user != user %}
                 <li><a href="https://www.facebook.com/app_scoped_user_id/{{ match.logged_user.link }}/" target="_blank">
-                    <button class="btn btn-success">See {{ match.logged_user.first_name }}'s Facebook!</button>
+                    <button class="btn btn-success matchUser">See {{ match.logged_user.first_name }}'s Facebook!</button>
                 </a></li>
             {% endif %}
         {% endfor %}

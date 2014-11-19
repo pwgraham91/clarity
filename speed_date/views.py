@@ -25,12 +25,14 @@ def home(request):
     match1 = Match.objects.filter(logged_user=user, user1_select=True)
     match2 = Match.objects.filter(chosen_user=user, user1_select=True)
     match_list = list(chain(match1, match2))
+    match_list_len = len(match_list)
     data = {
         'profile_data': profile_data,
         'friends': friends,
         'picture': picture,
         'user': request.user,
-        'match_list': match_list
+        'match_list': match_list,
+        'match_list_len': match_list_len
     }
     return render(request, "home.html", data)
 
@@ -67,10 +69,6 @@ def caller(request):
             other_user = all_users[0]
         except:
             pass
-        # Give me the first user in this list
-        # For testing purposes, rewrite other_user to give me my alter FB account
-        # all_users = User.objects.filter(first_name='Peter').exclude(email=request.user.email)
-        # other_user = all_users[0]
         data = {
             'profile_data': profile_data,
             'friends': friends,

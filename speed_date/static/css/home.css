@@ -2,8 +2,6 @@ h1 {
     text-align: center;
 }
 img {
-    float: left;
-    margin-right: 10px;
     width: 320px;
 }
 #sorry {
@@ -15,9 +13,25 @@ img {
 
 .col-centered {
     display:inline-block;
-    float: right;
-    /* reset the text-align */
-    text-align:right;
-    /* inline-block space fix */
     margin-right:-4px;
+}
+
+.CTACenter {
+    text-align: center;
+}
+
+#CTAButton {
+    text-align: center;
+    margin-top: 30px;
+    width: 100%;
+    height: 80px;
+    font-size: 40px;
+}
+
+#matches {
+    text-align: right;
+}
+
+.matchUser {
+    width: 100%;
 }
