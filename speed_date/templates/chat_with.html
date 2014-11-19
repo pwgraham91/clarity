@@ -1,6 +1,6 @@
 <h2 id="{{ liked_one.username }}">Chat with {% if match %}{{ liked_one.first_name }}{% else %}...{% endif %}</h2>
 {% if match %}
-<p>{{ liked_one.first_name }} Likes You Too!</p> <a href="https://www.facebook.com/app_scoped_user_id/{{ liked_one.link }}/" target="_blank"><button class="btn btn-success">See {{ liked_one.first_name }}'s Facebook!</button></a>
+<p>{{ liked_one.first_name }} Likes You Too!</p> <a href="https://www.facebook.com/app_scoped_user_id/{{ liked_one.new_link }}/" target="_blank"><button class="btn btn-success">See {{ liked_one.first_name }}'s Facebook!</button></a>
 {% endif %}
 <br>
 <br>

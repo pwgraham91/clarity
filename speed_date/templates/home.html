@@ -29,7 +29,7 @@
         {% for match in match_list %}
             <ul id="noDot">
             {% if match.logged_user != user %}
-                <li><a href="https://www.facebook.com/app_scoped_user_id/{{ match.logged_user.link }}/" target="_blank">
+                <li><a href="https://www.facebook.com/app_scoped_user_id/{{ match.logged_user.new_link }}/" target="_blank">
                     <button class="btn btn-success matchUser">See {{ match.logged_user.first_name }}'s Facebook!</button>
                 </a></li>
             {% endif %}
