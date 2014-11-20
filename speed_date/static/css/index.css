@@ -6,27 +6,40 @@
     text-align: center;
 }
 .jumbotron {
-    background-image: url("http://i61.tinypic.com/23j3gc2.jpg");
+    background-image: url("http://i62.tinypic.com/2uzuvy9.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
+    background-attachment: fixed;
 }
-
 html, body {
      height: 100%;
 }
 
 .jumboTitle {
     text-align: center;
+
+}
+
+.jumboT {
+    background-color:rgba(0,0,0,0.65);
+    border-radius: 40px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    /*opacity: .7;*/
 }
 
 #clarityTitle {
     font-size: 60px;
     margin-top: 100px;
+    /*font-weight: 300;*/
 }
 
 .section1 {
-    background-color: #ff4d54;
+    /*background-color: #ff4d54;*/
     margin-top: -30px;
     height: 380px;
     text-align: center;
@@ -37,13 +50,21 @@ img {
 }
 
 .section2 {
-    background-color: #014AA6;
+    /*background-color: #014AA6;*/
     margin-top: -30px;
     height: 380px;
     text-align: center;
 }
 h2, h3, h4 {
-    color: #e6e6e6;
+    color: #333;
+    font-weight: 100;
+}
+
+hr {
+    width: 90%;
+    border-top: 1px solid #a5a5a5;
+    margin-top: -40px;
+    margin-bottom: 35px;
 }
 
 #connectLeft {
@@ -59,8 +80,9 @@ h2, h3, h4 {
 }
 
 .section3 {
-    background-color: #609e4b;
+    /*background-color: #609e4b;*/
     margin-top: -30px;
+    margin-bottom: -40px;
     height: 380px;
     text-align: center;
 }
@@ -75,30 +97,49 @@ h2, h3, h4 {
     text-align: right;
     margin-left: 7px;
 }
+
 .video-section .pattern-overlay {
-background-color: rgba(71, 71, 71, 0.59);
-padding: 110px 0 32px;
-min-height: 496px;
-/* Incase of overlay problems just increase the min-height*/
+    background-color: rgba(71, 71, 71, 0.59);
+    padding: 110px 0 32px;
+    min-height: 496px;
+    /* Incase of overlay problems just increase the min-height*/
 }
+
 .video-section h1, .video-section h3{
-text-align:center;
-color:#fff;
+    text-align:center;
+    color:#fff;
 }
+
 .video-section h1{
-font-size:110px;
-font-family: 'Buenard', serif;
-font-weight:bold;
-text-transform: uppercase;
-margin: 40px auto 0px;
-text-shadow: 1px 1px 1px #000;
--webkit-text-shadow: 1px 1px 1px #000;
--moz-text-shadow: 1px 1px 1px #000;
+    font-size:110px;
+    font-family: 'Buenard', serif;
+    font-weight:bold;
+    text-transform: uppercase;
+    margin: 40px auto 0px;
+    text-shadow: 1px 1px 1px #000;
+    -webkit-text-shadow: 1px 1px 1px #000;
+    -moz-text-shadow: 1px 1px 1px #000;
 }
+
 .video-section h3{
-font-size: 25px;
-font-weight:lighter;
-margin: 0px auto 15px;
+    font-size: 25px;
+    font-weight:lighter;
+    margin: 0px auto 15px;
 }
-.video-section .buttonBar{display:none;}
-.player {font-size: 1px;}
+
+.video-section .buttonBar{
+    display:none;
+}
+
+.player {
+    font-size: 1px;
+}
+
+.homeButton {
+    background-color: rgba(15, 15, 15, 0.59);
+}
+
+p {
+    font-weight: 200;
+    letter-spacing: 1px;
+}

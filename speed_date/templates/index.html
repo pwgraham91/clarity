@@ -7,7 +7,6 @@
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
     <link href='http://fonts.googleapis.com/css?family=Buenard:700' rel='stylesheet' type='text/css'>
     <script src="http://pupunzi.com/mb.components/mb.YTPlayer/demo/inc/jquery.mb.YTPlayer.js"></script>
@@ -15,13 +14,15 @@
 <body>
 
     <div class="jumbotron special">
-        <h2 id="clarityTitle" class="jumboTitle">Clarity</h2>
-        <h3 class="jumboTitle">Live Video Chat Dating Service</h3>
+        <div class="jumboT">
+            <h2 id="clarityTitle" style="color: #ffffff" class="jumboTitle">Clarity</h2>
+            <h3 style="color: #ffffff" class="jumboTitle">Live Video Chat Dating Service</h3>
+        </div>
         <div class="login">
             {% if not user.is_authenticated %}
                 <a href="{% url "social:begin" "facebook" %}"><img id="fbLogin" width="300px" src="//nitelygigs.com/images/FacebookButton.png"></a>
             {% else %}
-                <a href="{% url "home" %}"><button style="width: 100px" class="btn btn-primary">Home</button></a>
+                <a href="{% url "home" %}"><button style="width: 100px" class="btn btn-primary homeButton">Home</button></a>
             {% endif %}
         </div>
     </div>
@@ -44,13 +45,14 @@
             </div>
         </div>
     </div>
+    <hr>
     <div class="section2">
         <div class="container">
             <h2>Connect With Others</h2>
             <div class="row">
                 <div id="connectLeft" class="col-md-6">
                     <h3>Gradually ease into a conversation</h3>
-                    <h4>Clarity eases in the video so you get to know someone through chatting and talking with them leading to meaningful conversations</h4>
+                    <p>Clarity eases in the video so you get to know someone through chatting and talking with them leading to meaningful conversations</p>
                 </div>
                 <div id="connectRight" class="col-md-6">
                     <img width="250px" style="border-radius: 40px;" class="img-responsive center-block" src="http://i60.tinypic.com/2q00e8z.jpg"/>
@@ -58,6 +60,7 @@
             </div>
         </div>
     </div>
+    <hr>
     <div class="section3">
         <div class="container">
             <h2>Match!</h2>
@@ -67,7 +70,7 @@
                 </div>
                 <div id="matchRight" class="col-md-6">
                     <h3>When Two People Really Like Each Other...</h3>
-                    <h4>Hit the liked button if you like the person on the other end. If they do too, you have a match! Matches allow you access to a link to their facebook so maybe you could meet up in real life!</h4>
+                    <p>Hit the liked button if you like the person on the other end. If they do too, you have a match! Matches allow you access to a link to their facebook so maybe you could meet up in real life!</p>
                 </div>
             </div>
         </div>
@@ -84,7 +87,7 @@
                 {% if not user.is_authenticated %}
                     <a href="{% url "social:begin" "facebook" %}"><img id="fbLogin" width="300px" src="//nitelygigs.com/images/FacebookButton.png"></a>
                 {% else %}
-                    <a href="{% url "home" %}"><button style="width: 100px" class="btn btn-primary">Home</button></a>
+                    <a href="{% url "home" %}"><button style="width: 100px" class="btn btn-primary homeButton">Home</button></a>
                 {% endif %}
             </div>
            </div>
