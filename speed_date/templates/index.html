@@ -9,6 +9,8 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Buenard:700' rel='stylesheet' type='text/css'>
+    <script src="http://pupunzi.com/mb.components/mb.YTPlayer/demo/inc/jquery.mb.YTPlayer.js"></script>
 </head>
 <body>
 
@@ -70,4 +72,31 @@
             </div>
         </div>
     </div>
+     <section class="content-section video-section">
+      <div class="pattern-overlay">
+      <a id="bgndVideo" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=WaLqP6jM3lQ',containment:'.video-section', quality:'large', autoPlay:true, mute:true, opacity:1}">bg</a>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+            <h1>Clarity</h1>
+            <h3>Match with a cool person and get a link to their facebook</h3>
+            <div class="login">
+                {% if not user.is_authenticated %}
+                    <a href="{% url "social:begin" "facebook" %}"><img id="fbLogin" width="300px" src="//nitelygigs.com/images/FacebookButton.png"></a>
+                {% else %}
+                    <a href="{% url "home" %}"><button style="width: 100px" class="btn btn-primary">Home</button></a>
+                {% endif %}
+            </div>
+           </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<script>
+    $(document).ready(function () {
+
+    $(".player").mb_YTPlayer();
+
+    });
+</script>
 </body>
