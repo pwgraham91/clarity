@@ -100,6 +100,7 @@ try:
 except ImportError:
     pass
 
+# Usually want to put everything before local_settings.py incase you want to overwrite it there
 LOGIN_REDIRECT_URL = 'home'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '761286703918742'
