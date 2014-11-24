@@ -217,6 +217,8 @@ var displayError = function (error) {
     }
 };
 
+// Might be worthwhile splitting the BistriConference into a separate file from the chat logic
+
 // CHAT
 $(document).ready(function() {
 //$('#video_container').children().eq(1).css("opacity", .1);
@@ -229,6 +231,9 @@ $(document).ready(function() {
             $('#video_container').children().eq(1).fadeIn(100000).css('display', 'block');
             console.log("fading")
         }
+        
+        // This check seems like it should be put in a reusable function
+        // and replaced appropriately below
         if (typeof window.other_username === 'undefined') {
             other_user = dater_id;
         }
@@ -300,6 +305,9 @@ $(document).ready(function() {
             }
         });
     };
+    
+    // liked and flagged could probably share some functionality
+    // only the element targetted and url called are different
     $("#liked").on("click", function () {
         if (typeof window.other_username === 'undefined') {
             other_user = dater_id;
