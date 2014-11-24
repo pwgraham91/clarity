@@ -22,6 +22,7 @@ def home(request):
     friends = graph.get_object("me/friends")
     picture = graph.get_object("me/picture", height="400")
     user = User.objects.get(email=request.user.email)
+    # You could just make this one queryset with an 'or filter' using a Q object
     match1 = Match.objects.filter(logged_user=user, user1_select=True)
     match2 = Match.objects.filter(chosen_user=user, user1_select=True)
     match_list = list(chain(match1, match2))
@@ -45,6 +46,8 @@ def caller(request):
         return HttpResponse("You've been banned for explicit content or you don't have at least 25 friends")
     else:
         # Get Facebook information
+        # This social auth block of code looks like you use multiple times that should be
+        # abstracted out
         user_social_auth = request.user.social_auth.filter(provider='facebook').first()
         graph = facebook.GraphAPI(user_social_auth.extra_data['access_token'])
         profile_data = graph.get_object("me")
@@ -58,11 +61,14 @@ def caller(request):
         # show a list of users who 1) fit my preference 2) whose preference fits me 3) randomly
         # 4) on the chat page in the last 5 seconds and 5) exclude myself
         # Try with
+        # You could just pass in multiple arguments to one filter here, shouldn't change the query
+        # and I think you'd want to put the exclude statement before the order_by for readability.
         all_users = User.objects.filter(gender=user_preference).\
             filter(preference=user_gender).filter(banned=False).\
             filter(fifty=True).order_by('?').exclude(email=request.user.email)
         other_user = all_users[0]
         try:
+            # Should have this share code with the previous queryset
             all_users = User.objects.filter(gender=user_preference).\
                 filter(preference=user_gender).filter(online=recent_range).\
                 filter(banned=False).filter(fifty=True).order_by('?').exclude(email=request.user.email)
@@ -90,6 +96,7 @@ def loc(request):
 
 def chat_messages(request, dater_username):
     target_dater = User.objects.get(username=dater_username)
+    # You could use an or filter here like mentioned above, which clean this up quite a bit
     message_sent = Chat.objects.filter(sender=request.user, recipient=target_dater)
     message_received = Chat.objects.filter(sender=target_dater, recipient=request.user)
     messages = []
@@ -138,6 +145,7 @@ def new_message(request):
 def gender(request, user_gender, user_preference):
     user_gender = int(user_gender)
     user_preference = int(user_preference)
+    # could simplify to one line : request.user.gender = user_gender == 1
     if user_gender == 0:
         request.user.gender = False
     elif user_gender == 1:
@@ -161,6 +169,7 @@ def online(request):
 def liked(request, dater_username):
     user = User.objects.get(email=request.user.email)
     liked_one = User.objects.get(username=dater_username)
+    # this looks like it could be a get_or_create
     try:
         my_match = Match.objects.get(logged_user=user, chosen_user=liked_one, user1_select=True)
     except Match.DoesNotExist:
