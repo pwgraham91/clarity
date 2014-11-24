@@ -10,6 +10,7 @@ class User(AbstractUser):
     online = models.DateTimeField(auto_now_add=True)
     banned = models.BooleanField(default=False)
     # Boolean to check if they have at least 50 friends
+    # This seems to be a bit unnecessary to store and could just be a method on User
     fifty = models.BooleanField(default=True)
     new_link = models.BigIntegerField(null=True, blank=True)
 
