@@ -82,12 +82,6 @@ def caller(request):
 def callee(request):
     return render(request, "callee.html")
 
-@login_required
-def loc(request):
-    # pnt = Point(-95.23592948913574, 38.97127105172941)
-    # imperial_d = D(mi=5)
-    return render(request, "firebase_chat.html")
-
 def chat_messages(request, dater_username):
     target_dater = User.objects.get(username=dater_username)
     message_sent = Chat.objects.filter(sender=request.user, recipient=target_dater)
