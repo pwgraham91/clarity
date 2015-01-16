@@ -13,7 +13,6 @@ class User(AbstractUser):
     fifty = models.BooleanField(default=True)
     new_link = models.BigIntegerField(null=True, blank=True)
 
-
     def __unicode__(self):
         return u"{}".format(self.username)
 

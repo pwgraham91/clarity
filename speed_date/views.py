@@ -82,6 +82,7 @@ def caller(request):
 def callee(request):
     return render(request, "callee.html")
 
+
 def chat_messages(request, dater_username):
     target_dater = User.objects.get(username=dater_username)
     message_sent = Chat.objects.filter(sender=request.user, recipient=target_dater)
@@ -98,6 +99,7 @@ def chat_messages(request, dater_username):
         'target_dater': target_dater,
     }
     return render(request, 'chat_messages.html', data)
+
 
 def chat_with(request, dater_username):
     user = User.objects.get(email=request.user.email)
