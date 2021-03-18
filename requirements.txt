@@ -1,5 +1,5 @@
 Django==1.7.1
-Pillow==2.6.1
+Pillow==8.1.1
 PyJWT==0.3.0
 Unidecode==0.04.16
 django-debug-toolbar==1.2.2
